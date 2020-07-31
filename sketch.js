@@ -7,7 +7,9 @@ let romvesenBilde;
 let gameOverBilde;
 let bakgrunnBilde;
 let hjerteBilde;
+let hovedmenyBilde;
 let gameOver = false;
+let hovedmeny = true;
 let score = 0;
 let level = 1;
 let liv = 3;
@@ -29,10 +31,12 @@ function preload() {
   bakgrunnBilde = loadImage(bakgrunnPng)
   gameOverBilde = loadImage(gameOverPng)
   hjerteBilde = loadImage(hjertePng)
+  hovedmenyBilde = loadImage(hovedmenyPng)
 }
 
 function setup() {
-  createCanvas(400, 400);
+  let canvas = createCanvas(400, 400);
+  canvas.parent("gameArea")
   spiller = new Spiller(200, 360);
   setupRomvesener();
 }
@@ -141,6 +145,8 @@ function tegnHjerter() {
 function draw() {
   if (gameOver) {
     image(gameOverBilde, 0, 0);
+  } else if(hovedmeny) {
+    image(hovedmenyBilde, 0, 0);
   } else {
     rectMode(CENTER);
     background(bakgrunnBilde);
@@ -194,5 +200,9 @@ function keyPressed() {
   }
   if (keyCode === DOWN_ARROW) {
     spiller.setthastighet(0);
+  }
+
+  if (hovedmeny) {
+    hovedmeny = false
   }
 }
